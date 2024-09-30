@@ -4,19 +4,22 @@ import Home from '../pages/Home'
 import Login from '../pages/Login'
 import Product from '../pages/Product'
 import Cart from '../pages/Cart'
+import CartProvider from '../context/CartContext'
 
 function AppRoutes() {
     return (
         <>
-            <Routes>
-                <Route path='/login' element={<Login />} />
-                <Route index element={<Navigate to={'login'}></Navigate>} />
-                <Route path='/' element={<AppLayout />}>
-                    <Route path='home' element={<Home />} />
-                    <Route path='products' element={<Product />} />
-                    <Route path='cart' element={<Cart />} />
-                </Route>
-            </Routes>
+            <CartProvider>
+                <Routes>
+                    <Route path='/login' element={<Login />} />
+                    <Route index element={<Navigate to={'login'}></Navigate>} />
+                    <Route path='/' element={<AppLayout />}>
+                        <Route path='home' element={<Home />} />
+                        <Route path='products' element={<Product />} />
+                        <Route path='cart' element={<Cart />} />
+                    </Route>
+                </Routes>
+            </CartProvider>
         </>
     )
 }
