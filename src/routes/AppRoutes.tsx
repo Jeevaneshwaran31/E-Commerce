@@ -5,6 +5,7 @@ import Login from '../pages/Login'
 import Product from '../pages/Product'
 import Cart from '../pages/Cart'
 import CartProvider from '../context/CartContext'
+import ProductDetail from '../pages/ProductDetail'
 
 function AppRoutes() {
     return (
@@ -16,6 +17,7 @@ function AppRoutes() {
                     <Route path='/' element={<AppLayout />}>
                         <Route path='home' element={<Home />} />
                         <Route path='products' element={<Product />} />
+                        <Route path='products/:productId' element={<ProductDetail />} />
                         <Route path='cart' element={<Cart />} />
                     </Route>
                 </Routes>

@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useState } from "react"
-import { productDetails } from "../utils/ProductDetails"
+import { productDetails } from "../data/ProductDetails"
 
 interface Product {
     id: number,

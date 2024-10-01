@@ -13,12 +13,12 @@ interface ItemDetails {
 function Item(props: ItemDetails) {
     const contextType = useContext(CartContext);
     if (!contextType) {
-        throw new Error("Error")
+        throw new Error("Cart contextType must be used in CartProvider")
     }
 
     return (
         <div className="w-60 shadow shadow-gray-300 m-3 text-center border-1">
-            <Link to="">
+            <Link to={`${props.id}`}>
                 <img src={props.image} alt="Ethnic wear" className='w-56 h-56 p-3 ms-2' />
                 <div className="mb-1 text-gray-900 font-semibold">{props.name}</div>
                 <div className="mb-2 text-xl font-bold text-gray-900">Rs.{props.price}</div>

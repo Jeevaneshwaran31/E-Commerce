@@ -1,4 +1,4 @@
-import { productDetails } from '../utils/ProductDetails'
+import { productDetails } from '../data/ProductDetails'
 import Item from '../components/Item'
 import Categories from '../assets/Categories.png'
 

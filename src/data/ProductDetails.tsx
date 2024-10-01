@@ -6,14 +6,8 @@ import Grooming from '../assets/Grooming.png'
 import Men_Footwear from '../assets/Men Footwear.png'
 import Trolleys from '../assets/Trolleys.png'
 import Makeup from '../assets/Makeup.png'
+import Product from '../type/ProductType'
 
-interface Product {
-    id : number,
-    name : string,
-    image : string,
-    description : string,
-    price : number
-}
 
 export const productDetails : Product[] = [
     {
@@ -48,7 +42,7 @@ export const productDetails : Product[] = [
         id:5,
         name:"Grooming",
         description:"",
-        price:450,
+        price:1450,
         image:Grooming
     },
     {
