@@ -30,9 +30,9 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const addToCart = (product: Product) => {
         const existCartItem = cart.find((item) => item.id === product.id);
         if (existCartItem) {
-            setCart(cart.map((item)=>
+            setCart(cart.map((item) =>
                 item.id === product.id ? { ...existCartItem, quantity: existCartItem.quantity + 1 } : item
-        ))
+            ))
         } else {
             setCart([...cart, { ...product, quantity: 1 }])
         }
@@ -41,7 +41,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const updateItemQuantity = (id: number, quantity: number) => {
         setCart(cart.map((item) =>
             item.id === id ? { ...item, quantity: quantity - 1 } : item
-        ));
+        ).filter((item) => item.id !== id || quantity > 1))
     }
 
     return (

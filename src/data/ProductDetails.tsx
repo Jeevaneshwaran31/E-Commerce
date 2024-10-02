@@ -1,70 +1,69 @@
-import Bags from '../assets/Bags.png'
-import Casual_Wear from '../assets/Casual Wear.png'
-import Ethnic_Wear from '../assets/Ethnic wear.png'
-import Flip_Flops from '../assets/Flip-Flops.png'
-import Grooming from '../assets/Grooming.png'
-import Men_Footwear from '../assets/Men Footwear.png'
-import Trolleys from '../assets/Trolleys.png'
-import Makeup from '../assets/Makeup.png'
+import Backpack from '../assets/backpack.jpg'
+import Waist_belt from '../assets/waist-belt-bag.jpg'
+import Kids from '../assets/kids-bag.jpg'
+import Drawstring from '../assets/drawstring-bag.jpg'
+import Rucksack from '../assets/rucksack.jpg'
+import Knapsack from '../assets/knapsack.jpg'
+import Laptop from '../assets/laptop-bag.jpg'
+import Barrel from '../assets/barrel-bag.jpg'
 import Product from '../type/ProductType'
-
 
 export const productDetails : Product[] = [
     {
         id:1,
-        name:"Bags",
+        name:"Backpack",
         description:"",
         price:700,
-        image:Bags
+        image:Backpack
     },
     {
         id:2,
-        name:"Casual Wear",
+        name:"Waist Belt Bag",
         description:"",
         price:500,
-        image:Casual_Wear
+        image:Waist_belt
     },
     {
         id:3,
-        name:"Ethnic Wear",
+        name:"Kids Bag",
         description:"",
         price:650,
-        image:Ethnic_Wear
+        image:Kids
     },
     {
         id:4,
-        name:"Flip Flops",
+        name:"Drawstring Bag",
         description:"",
         price:230,
-        image:Flip_Flops
+        image:Drawstring
     },
     {
         id:5,
-        name:"Grooming",
+        name:"Rucksack",
         description:"",
         price:1450,
-        image:Grooming
+        image:Rucksack
     },
     {
         id:6,
-        name:"Men's Footwear",
+        name:"Knapsack",
         description:"",
         price:700,
-        image:Men_Footwear
+        image:Knapsack
     },
     {
         id:7,
-        name:"Trolleys",
+        name:"Laptop Bag",
         description:"",
         price:2500,
-        image:Trolleys
+        image:Laptop
     },
     {
         id:8,
-        name:"Beauty & Makeup",
+        name:"Barrel Bag",
         description:"",
         price:1000,
-        image:Makeup
+        image:Barrel
     },
 ];
 

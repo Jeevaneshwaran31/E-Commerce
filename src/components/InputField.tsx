@@ -1,5 +1,3 @@
-import { ReactElement } from "react"
-
 interface InputProps{
     className: string,
     type:string,

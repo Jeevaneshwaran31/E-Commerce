@@ -1,7 +1,6 @@
 import { useContext } from "react"
 import { CartContext } from "../context/CartContext"
 import { useNavigate, useParams } from "react-router-dom";
-import Product from "../type/ProductType";
 import Button from "../components/Button";
 
 function ProductDetail() {
@@ -13,9 +12,12 @@ function ProductDetail() {
     }
     const { product, addToCart } = contextType;
 
-    const productItem: Product = product.find((item) =>
+    const productItem = product.find((item) =>
         String(item.id) === productId
     )
+    if(!productItem) {
+        throw new Error("Error");
+    }
 
     return (
         <div className="mt-5 ml-4 flex">
