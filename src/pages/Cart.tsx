@@ -3,6 +3,7 @@ import { CartContext } from "../context/CartContext"
 import { useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import { Icons, IconType } from "../components/Icons";
+import Table from "../components/Table";
 
 function Cart() {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ function Cart() {
     if (!contextType) {
         throw new Error("Cart contextType must be used in CartProvider");
     }
-    const { cart, updateItemQuantity, addToCart } = contextType;
+    const { cart } = contextType;
 
     const totalAmount = cart.reduce((total, product) => total + (product.price * product.quantity), 0)
     let tax;
@@ -27,46 +28,16 @@ function Cart() {
                     <Button onClick={() => navigate(-1)} className="w-28 h-9 mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name="Go Back"></Button>
                 </div>
                 {cart.length === 0 ? (
-                        <div className="flex flex-col items-center justify-center py-12">
-                            <Icons type={IconType.EmptyCartIcon} />
-                            <p className="text-gray-600 text-lg font-semibold mb-4">Your shopping cart is empty.</p>
-                            <Button onClick={() => navigate("/products")} className="px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition-colors duration-300" name="Let's go shopping"></Button>
-                        </div>
+                    <div className="flex flex-col items-center justify-center py-12">
+                        <Icons type={IconType.EmptyCartIcon} />
+                        <p className="text-gray-600 text-lg font-semibold mb-4">Your shopping cart is empty.</p>
+                        <Button onClick={() => navigate("/products")} className="px-6 py-2 bg-blue-500 text-white rounded-md shadow-md hover:bg-blue-600 transition-colors duration-300" name="Let's go shopping"></Button>
+                    </div>
                 ) : (
                     <div className="flex flex-col md:flex-row gap-4">
                         <div className="md:w-3/4">
                             <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-                                <table className="w-full">
-                                    <thead>
-                                        <tr>
-                                            <th className="text-left font-semibold">Product</th>
-                                            <th className="text-left font-semibold">Price</th>
-                                            <th className="text-left font-semibold">Quantity</th>
-                                            <th className="text-left font-semibold">Total</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {cart.map((item) =>
-                                            <tr>
-                                                <td className="py-4">
-                                                    <div className="flex items-center">
-                                                        <img className="h-16 w-16 mr-4" src={item.image} alt="Product image" />
-                                                        <span className="font-semibold">{item.name}</span>
-                                                    </div>
-                                                </td>
-                                                <td className="py-4">Rs.{item.price}</td>
-                                                <td className="py-4">
-                                                    <div className="flex items-center">
-                                                        <Button className="border rounded-md py-2 px-4 mr-2" onClick={() => updateItemQuantity(item.id, item.quantity)} name="-"></Button>
-                                                        <span className="text-center w-8">{item.quantity}</span>
-                                                        <Button className="border rounded-md py-2 px-4 ml-2" onClick={() => addToCart(item)} name="+"></Button>
-                                                    </div>
-                                                </td>
-                                                <td className="py-4">Rs.{item.price * item.quantity}</td>
-                                            </tr>
-                                        )}
-                                    </tbody>
-                                </table>
+                                <Table title={["Product", "Price", "Quantity", "Total"]}></Table>
                             </div>
                         </div>
                         <div className="md:w-1/4">

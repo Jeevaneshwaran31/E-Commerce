@@ -13,14 +13,14 @@ export const productDetails : Product[] = [
         id:1,
         name:"Backpack",
         description:"",
-        price:700,
+        price:1200,
         image:Backpack
     },
     {
         id:2,
         name:"Waist Belt Bag",
         description:"",
-        price:500,
+        price:1500,
         image:Waist_belt
     },
     {
@@ -34,7 +34,7 @@ export const productDetails : Product[] = [
         id:4,
         name:"Drawstring Bag",
         description:"",
-        price:230,
+        price:330,
         image:Drawstring
     },
     {
@@ -48,21 +48,21 @@ export const productDetails : Product[] = [
         id:6,
         name:"Knapsack",
         description:"",
-        price:700,
+        price:1700,
         image:Knapsack
     },
     {
         id:7,
         name:"Laptop Bag",
         description:"",
-        price:2500,
+        price:1100,
         image:Laptop
     },
     {
         id:8,
         name:"Barrel Bag",
         description:"",
-        price:1000,
+        price:900,
         image:Barrel
     },
 ];
