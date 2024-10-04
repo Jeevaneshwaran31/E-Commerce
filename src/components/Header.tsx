@@ -1,14 +1,23 @@
 import { useContext } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { CartContext } from "../context/CartContext"
 import { Icons, IconType } from "./Icons";
+import { AuthContext } from "../context/AuthContext";
 
 function Header() {
     const contextType = useContext(CartContext)
+    const authType = useContext(AuthContext)
+    const {Logout} = authType;
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        Logout();
+        navigate("/login");
+    }
 
     return (
         <>
-            <nav className="bg-gray-200 shadow shadow-gray-300 w-100 px-6 md:px-auto">
+            <nav className="bg-gray-200 shadow shadow-gray-300 w-full fixed px-6 md:px-auto">
                 <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
                     <div className='flex'>
                         <div className="text-indigo-500 md:order-1">
@@ -32,7 +41,7 @@ function Header() {
                                 <Icons type={IconType.CartIcon} />
                                 <div className="w-4 h-4 flex items-center justify-center -mt-5 -ms-2 rounded-lg text-xs bg-red-500 text-white">{contextType.cart.length}</div>
                             </Link>
-                            <Link className="flex items-center" to="/login">
+                            <Link className="flex items-center" to="" onSubmit={handleLogout}>
                                 <Icons type={IconType.ProfileIcon} />
                             </Link>
                         </div>

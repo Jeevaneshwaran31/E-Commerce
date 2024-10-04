@@ -1,17 +1,23 @@
 import { useNavigate } from "react-router-dom"
 import InputField from "../components/InputField"
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Button from "../components/Button";
+import { AuthContext } from "../context/AuthContext";
 
 function Login() {
     const [email, setEmail] = useState<String>("");
     const [password, setPassword] = useState<String>("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const authType = useContext(AuthContext);
+    const {Login} = authType;
     const handleLogin = () => {
-        if (email != "" && password != "") {
-            navigate("/home")
-        } else {
+        if (email === "jee@gmail.com" && password === "1234") {
+            Login();
+            navigate("/home");
+        } else if (email === "" && password === "") {
             alert("Please fill the details!!!");
+        } else {
+            alert("Please provide correct email and password")
         }
     }
     return (
