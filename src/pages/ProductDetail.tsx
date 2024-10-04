@@ -1,8 +1,7 @@
-import { useCallback, useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
-import Product from "../type/ProductType";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -27,15 +26,8 @@ function ProductDetail() {
     return <p>No products found.</p>;
   }
 
-  const handleCart = useCallback(
-    (product: Product) => {
-      addToCart(product);
-    },
-    [cart]
-  );
-
   return (
-    <div className="mt-5 ml-4 flex">
+    <div className="ml-4 flex relative top-24">
       <Button
         onClick={() => navigate(-1)}
         varient="Secondary"

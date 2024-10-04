@@ -25,7 +25,7 @@ function Cart() {
     }
   };
   return (
-    <div className="bg-gray-100 h-screen py-8">
+    <div className="bg-gray-100 h-screen py-8 relative top-16">
       <div className="container mx-auto px-4">
         <div className="flex justify-between">
           <h1 className="text-2xl font-semibold mb-4">Shopping Cart</h1>
