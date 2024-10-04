@@ -1,13 +1,23 @@
+import '../assets/scss/Button.css'
+
 interface ButtonProps {
-    className ? : string,
-    onClick : () => void,
-    name : string 
+  className?: string;
+  onClick: () => void;
+  name: string;
+  varient?: "Primary" | "Secondary" | "Teritory";
 }
 
-function Button({className = "", onClick, name}:ButtonProps) {
+function Button({
+  className = "",
+  onClick,
+  name,
+  varient = "Primary",
+}: ButtonProps) {
   return (
-    <button className={className} onClick={onClick}>{name}</button>
-  )
+    <button className={`${className} ${varient}`} onClick={onClick}>
+      {name}
+    </button>
+  );
 }
 
-export default Button
+export default Button;

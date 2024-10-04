@@ -3,5 +3,6 @@ export default interface Product {
     name : string,
     image : string,
     description : string,
-    price : number
+    price : number,
+    quantity: number
 }

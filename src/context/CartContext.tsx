@@ -1,30 +1,22 @@
 import { createContext, ReactNode, useState } from "react"
 import { productDetails } from "../data/ProductDetails"
+import Product from "../type/ProductType"
 
-interface Product {
-    id: number,
-    name: string,
-    image: string,
-    description?: string,
-    price: number,
-    quantity?: number
+const CartType = {
+    cart: [
+        {id:0, name:"", description:"", price:0, image:"", quantity:0}
+    ],
+    product: [
+        {id:0, name:"", description:"", price:0, image:"", quantity:0}
+    ],
+    addToCart: (product: Product) => {},
+    updateItemQuantity: (id: number, quantity: number) => {}
 }
 
-interface Cart extends Product {
-    quantity: number
-}
-
-interface CartType {
-    cart: Cart[],
-    product: Product[],
-    addToCart: (product: Product) => void,
-    updateItemQuantity: (id: number, quantity: number) => void
-}
-
-export const CartContext = createContext<CartType | undefined>(undefined)
+export const CartContext = createContext(CartType)
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
-    const [cart, setCart] = useState<Cart[]>([]);
+    const [cart, setCart] = useState<Product[]>([]);
     const [product] = useState<Product[]>(productDetails);
 
     const addToCart = (product: Product) => {

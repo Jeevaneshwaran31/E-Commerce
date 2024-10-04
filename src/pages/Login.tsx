@@ -37,7 +37,7 @@ function Login() {
                                 <a className="text-gray-600 hover:text-gray-800" href="#">Forgot your password?</a>
                             </div>
                             <div>
-                                <Button className="mt-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                <Button className="mt-2 rounded"
                                  name="Login" onClick={handleLogin}></Button>
                             </div>
                         </form>

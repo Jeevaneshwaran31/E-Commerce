@@ -1,31 +1,70 @@
-import { useContext } from 'react';
-import { Link } from 'react-router-dom'
-import { CartContext } from '../context/CartContext';
-import Button from './Button';
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
+import Button from "./Button";
+import Product from "../type/ProductType";
 
-interface ItemDetails {
-    id: number,
-    name: string,
-    image: string,
-    price: number
-}
+function Item(props: Product) {
+  const contextType = useContext(CartContext);
+  const { cart, product, addToCart, updateItemQuantity } = contextType;
 
-function Item(props: ItemDetails) {
-    const contextType = useContext(CartContext);
-    if (!contextType) {
-        throw new Error("Cart contextType must be used in CartProvider")
-    }
+  const [cartItem, setCartItem] = useState(
+    cart.find((element) => element.id === props.id)
+  );
 
-    return (
-        <div className="w-60 shadow shadow-gray-300 m-3 text-center border-1">
-            <Link to={`${props.id}`}>
-                <img src={props.image} alt="Ethnic wear" className='w-56 h-56 p-3 ms-2' />
-                <div className="mb-1 text-gray-900 font-semibold">{props.name}</div>
-                <div className="mb-2 text-xl font-bold text-gray-900">Rs.{props.price}</div>
-            </Link>
-            <Button onClick={() => contextType.addToCart(props)} className="w-28 h-9 mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name='Add to Cart'></Button>
+  useEffect(() => {
+    setCartItem(cart.find((element) => element.id === props.id));
+  }, [cart,props.id]);
+
+  if (!product || product.length === 0) {
+    return <p>No products found.</p>;
+  }
+
+  const handleCart = useCallback(
+    (product: Product) => {
+      addToCart(product);
+    },
+    [cart]
+  );
+
+  return (
+    <div className="w-60 shadow shadow-gray-300 m-3 text-center border-1">
+      <Link to={`${props.id}`}>
+        <img
+          src={props.image}
+          alt="Ethnic wear"
+          className="w-56 h-56 p-3 ms-2"
+        />
+        <div className="mb-1 text-gray-900 font-semibold">{props.name}</div>
+        <div className="mb-2 text-xl font-bold text-gray-900">
+          Rs.{props.price}
         </div>
-    )
+      </Link>
+      {cartItem ? (
+        <div className="flex justify-center items-center">
+          <Button
+            className="mr-2"
+            varient="Teritory"
+            onClick={() => updateItemQuantity(props.id, props.quantity)}
+            name="-"
+          ></Button>
+          <span className="text-center w-8">{cartItem.quantity}</span>
+          <Button
+            className="ml-2"
+            varient="Teritory"
+            onClick={() => addToCart(props)}
+            name="+"
+          ></Button>
+        </div>
+      ) : (
+        <Button
+          onClick={() => handleCart(props)}
+          varient="Secondary"
+          name="Add to Cart"
+        ></Button>
+      )}
+    </div>
+  );
 }
 
-export default Item
+export default Item;

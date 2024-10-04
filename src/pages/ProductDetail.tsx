@@ -1,42 +1,91 @@
-import { useContext } from "react"
-import { CartContext } from "../context/CartContext"
+import { useCallback, useContext, useEffect, useState } from "react";
+import { CartContext } from "../context/CartContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
+import Product from "../type/ProductType";
 
 function ProductDetail() {
-    const { productId } = useParams();
-    const navigate = useNavigate();
-    const contextType = useContext(CartContext);
-    if (!contextType) {
-        throw new Error("Error");
-    }
-    const { product, addToCart } = contextType;
+  const { productId } = useParams();
+  const navigate = useNavigate();
+  const contextType = useContext(CartContext);
+  const { cart, product, addToCart, updateItemQuantity } = contextType;
 
-    const productItem = product.find((item) =>
-        String(item.id) === productId
-    )
-    if(!productItem) {
-        throw new Error("Error");
-    }
+  const productItem = product.find((item) => String(item.id) === productId);
+  if (!productItem) {
+    throw new Error("Error");
+  }
 
-    return (
-        <div className="mt-5 ml-4 flex">
-            <Button onClick={() => navigate(-1)} className="w-28 h-9 mb-3 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" name="Go Back"></Button>
-            <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg">
-                <img className="w-80 mx-auto mt-3" src={productItem.image} alt="Product Image" />
-                <div className="p-4">
-                    <h3 className="text-lg text-center font-medium mb-2">{productItem.name}</h3>
-                    <p className="text-gray-600 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vitae ante
-                        vel eros fermentum faucibus sit amet euismod lorem.</p>
-                    <div className="flex items-center justify-between">
-                        <span className="font-bold text-lg">Rs.{productItem.price}</span>
-                        <Button onClick={() => addToCart(productItem)} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" name="Add to Cart"></Button>
-                    </div>
-                </div>
-            </div>
+  const [cartItem, setCartItem] = useState(
+    cart.find((element) => element.id === productItem.id)
+  );
+
+  useEffect(() => {
+    setCartItem(cart.find((element) => element.id === productItem.id));
+  }, [cart, productItem.id]);
+
+  if (!product || product.length === 0) {
+    return <p>No products found.</p>;
+  }
+
+  const handleCart = useCallback(
+    (product: Product) => {
+      addToCart(product);
+    },
+    [cart]
+  );
+
+  return (
+    <div className="mt-5 ml-4 flex">
+      <Button
+        onClick={() => navigate(-1)}
+        varient="Secondary"
+        name="Go Back"
+      ></Button>
+      <div className="max-w-md mx-auto rounded-md overflow-hidden shadow-md hover:shadow-lg">
+        <img
+          className="w-64 mx-auto mt-3"
+          src={productItem.image}
+          alt="Product Image"
+        />
+        <div className="p-4">
+          <h3 className="text-lg text-center font-medium mb-2">
+            {productItem.name}
+          </h3>
+          <p className="text-gray-600 text-sm mb-4">
+            {productItem.description}
+          </p>
+          <div className="flex items-center justify-between">
+            <span className="font-bold text-lg">Rs.{productItem.price}</span>
+            {cartItem ? (
+              <div className="flex justify-end items-center">
+                <Button
+                  className="mr-2"
+                  varient="Teritory"
+                  onClick={() =>
+                    updateItemQuantity(productItem.id, productItem.quantity)
+                  }
+                  name="-"
+                ></Button>
+                <span className="text-center w-8">{cartItem.quantity}</span>
+                <Button
+                  className="ml-2"
+                  varient="Teritory"
+                  onClick={() => addToCart(productItem)}
+                  name="+"
+                ></Button>
+              </div>
+            ) : (
+              <Button
+                onClick={() => addToCart(productItem)}
+                className="rounded"
+                name="Add to Cart"
+              ></Button>
+            )}
+          </div>
         </div>
-
-    )
+      </div>
+    </div>
+  );
 }
 
-export default ProductDetail
+export default ProductDetail;

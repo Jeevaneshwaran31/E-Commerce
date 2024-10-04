@@ -9,7 +9,7 @@ function Product() {
         <img src={Categories} alt="Cart Categories" />
       </div>
       {productDetails.map((item, i) => {
-        return <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price}></Item>
+        return <Item key={i} id={item.id} name={item.name} image={item.image} price={item.price} description={item.description} quantity={item.quantity}></Item>
       })}
     </div>
   )
