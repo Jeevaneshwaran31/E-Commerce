@@ -1,4 +1,4 @@
-import '../assets/scss/Button.css'
+import '../assets/scss/Button.scss'
 
 interface ButtonProps {
   className?: string;

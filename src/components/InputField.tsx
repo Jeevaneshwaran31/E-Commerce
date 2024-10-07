@@ -6,9 +6,9 @@ interface InputProps{
     placeholder?: string 
 }
 
-function InputField( props : InputProps) {
+function InputField({className, type, onChange, value="", placeholder=""} : InputProps) {
   return (
-    <input type= {props.type} placeholder={props.placeholder} className={props.className} value={props.value} onChange={props.onChange}/>
+    <input type= {type} placeholder={placeholder} className={className} value={value} onChange={onChange}/>
   )
 }
 

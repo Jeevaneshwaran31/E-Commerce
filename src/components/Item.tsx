@@ -4,21 +4,17 @@ import { CartContext } from "../context/CartContext";
 import Button from "./Button";
 import Product from "../type/ProductType";
 
-function Item(props: Product) {
+function Item({ item }: { item: Product }) {
   const contextType = useContext(CartContext);
-  const { cart, product, addToCart, updateItemQuantity } = contextType;
+  const { cart, addToCart, updateItemQuantity } = contextType;
 
   const [cartItem, setCartItem] = useState(
-    cart.find((element) => element.id === props.id)
+    cart.find((element) => element.id === item.id)
   );
 
   useEffect(() => {
-    setCartItem(cart.find((element) => element.id === props.id));
-  }, [cart,props.id]);
-
-  if (!product || product.length === 0) {
-    return <p>No products found.</p>;
-  }
+    setCartItem(cart.find((element) => element.id === item.id));
+  }, [cart, item.id]);
 
   const handleCart = useCallback(
     (product: Product) => {
@@ -29,15 +25,15 @@ function Item(props: Product) {
 
   return (
     <div className="w-60 shadow shadow-gray-300 m-3 text-center border-1">
-      <Link to={`${props.id}`}>
+      <Link to={`${item.id}`}>
         <img
-          src={props.image}
+          src={item.image}
           alt="Ethnic wear"
           className="w-56 h-56 p-3 ms-2"
         />
-        <div className="mb-1 text-gray-900 font-semibold">{props.name}</div>
+        <div className="mb-1 text-gray-900 font-semibold">{item.name}</div>
         <div className="mb-2 text-xl font-bold text-gray-900">
-          Rs.{props.price}
+          Rs.{item.price}
         </div>
       </Link>
       {cartItem ? (
@@ -45,20 +41,20 @@ function Item(props: Product) {
           <Button
             className="mr-2"
             varient="Teritory"
-            onClick={() => updateItemQuantity(props.id, props.quantity)}
+            onClick={() => updateItemQuantity(item.id, item.quantity)}
             name="-"
           ></Button>
           <span className="text-center w-8">{cartItem.quantity}</span>
           <Button
             className="ml-2"
             varient="Teritory"
-            onClick={() => addToCart(props)}
+            onClick={() => addToCart(item)}
             name="+"
           ></Button>
         </div>
       ) : (
         <Button
-          onClick={() => handleCart(props)}
+          onClick={() => handleCart(item)}
           varient="Secondary"
           name="Add to Cart"
         ></Button>

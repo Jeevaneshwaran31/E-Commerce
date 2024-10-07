@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import home_image from "../assets/Home.png"
 import { Icons, IconType } from "./Icons"
+import { PRODUCTS } from "../constants/constants"
 
 function MainSection() {
     return (
@@ -14,7 +15,7 @@ function MainSection() {
                     <p className="text-neutral-900 text-7xl font-bold mb-2">Bags</p>
                     <p className="text-neutral-900 text-7xl font-bold">Collections</p>
                 </div>
-                <Link to="/products">
+                <Link to={PRODUCTS}>
                     <div className="flex justify-center items-center w-56 h-16 rounded-full mt-7 bg-red-500 text-white text-xl font-medium">
                         Latest Collection
                         <Icons type={IconType.ArrowIcon} />

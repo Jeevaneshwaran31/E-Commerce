@@ -1,11 +1,7 @@
-import MainSection from '../components/MainSection'
+import MainSection from "../components/MainSection";
 
 function Home() {
-  return (
-    <>
-        <MainSection />
-    </>
-)
+  return <MainSection />;
 }
 
-export default Home
+export default Home;

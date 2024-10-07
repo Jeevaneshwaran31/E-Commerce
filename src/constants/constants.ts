@@ -1,0 +1,6 @@
+export const LOGIN = "/login"
+export const HOME = "/home"
+export const PRODUCTS = "/products"
+export const PRODUCT_ID = "products/:productId"
+export const CART = "/cart"
+export const PAYMENT = "payment"

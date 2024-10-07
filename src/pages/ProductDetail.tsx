@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import { useNavigate, useParams } from "react-router-dom";
 import Button from "../components/Button";
+import { PRODUCTS } from "../constants/constants";
 
 function ProductDetail() {
   const { productId } = useParams();
@@ -22,14 +23,10 @@ function ProductDetail() {
     setCartItem(cart.find((element) => element.id === productItem.id));
   }, [cart, productItem.id]);
 
-  if (!product || product.length === 0) {
-    return <p>No products found.</p>;
-  }
-
   return (
     <div className="ml-4 flex relative top-24">
       <Button
-        onClick={() => navigate(-1)}
+        onClick={() => navigate(`${PRODUCTS}`)}
         varient="Secondary"
         name="Go Back"
       ></Button>
